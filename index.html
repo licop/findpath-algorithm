@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="src/styles.css" ></link>
+</head>
+
+<body>
+	<div id="app">
+		<div id="setting">
+			<p>设置终点x坐标：<input id="input-x" type="text"></p>
+			<p>设置终点y坐标：<input id="input-y" type="text"></p>
+			<button onclick="localStorage.map1 = JSON.stringify(map)">保存</button>
+			<button onclick="startFindPath()">寻找路径</button>
+		</div>
+		<div id="container"></div>
+	</div>
+    
+	<!-- <script src="src/quene.js"></script> -->
+	<!-- <script src="src/sorted.js"></script> -->
+	<script src="src/biaryHeap.js"></script>
+</body>
+
+</html>

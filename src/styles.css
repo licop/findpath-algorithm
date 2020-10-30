@@ -1,0 +1,21 @@
+body {
+  font-family: sans-serif;
+}
+.cell{
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: grey;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  vertical-align: middle;
+  
+}
+#container{
+  width: 701px;
+  margin-top: 10px;
+  line-height: 6px;
+}
+input{
+  width: 50px;
+}
