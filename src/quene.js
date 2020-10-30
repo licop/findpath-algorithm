@@ -47,36 +47,38 @@ document.addEventListener('contextmenu', e => {
 
 async function findPath(map, start, end) {
     map = map.slice();
-    // 定义队列，从一侧入对，从一侧出队,广度优先搜索
+    // 定义队列，从一侧入对，从一侧出队, 广度优先搜索
     let quene = [start];
     
+    // 将搜索
     async function insert([x, y], pre) {
         if(map[100 * y + x] !== 0)
             return;
         if(x < 0 || y < 0 || x >= 100 || y >= 100) 
             return;
+
         map[100 * y + x] = pre;
         container.children[y * 100 + x].style.backgroundColor = 'lightgreen';
         await sleep(1)
         quene.push([x, y]);
     }
-
+    
     while(quene.length) {
-        let [x, y] = quene.shift(); // pop unshift() | push shift()
-        
-        // 找到终点之后寻求路径
+        // 队列在后端进行插入操作，在前端进行删除操作, push() shift()   
+        let [x, y] = quene.shift();
+
+        // 找到终点之后 复原出找到终点的路径
         if(x === end[0] && y === end[1]) {
             let path = [];
             while(x !== start[0] || y !== start[1]) {
                 path.push([x, y])
-
                 container.children[y * 100 + x].style.backgroundColor = 'pink';
                 await sleep(5);
                 [x, y] = map[y * 100 + x];
             }
             return path;
         }
-
+        
         // 处理直线
         await insert([x - 1, y], [x, y]);
         await insert([x + 1, y], [x, y]);
@@ -97,6 +99,15 @@ function startFindPath() {
     container.children[endy * 100 + endx].style.backgroundColor = 'red';
 
     findPath(map, [0, 0], [endx, endy])
+}
+
+function cleanPath() {
+    for(let y = 0; y < 100; y++) {
+        for(let x = 0; x < 100; x++) {
+            container.children[y * 100 + x].style.backgroundColor = 'grey';
+        }
+    }
+    delete localStorage.map1;
 }
 
 function sleep(dur) {

@@ -132,6 +132,15 @@ function startFindPath() {
     findPath(map, [0, 0], [endx, endy])
 }
 
+function cleanPath() {
+    for(let y = 0; y < 100; y++) {
+        for(let x = 0; x < 100; x++) {
+            container.children[y * 100 + x].style.backgroundColor = 'grey';
+        }
+    }
+    delete localStorage.map1;
+}
+
 function sleep(dur) {
     return new Promise(resolve => {
         setTimeout(resolve, dur);
